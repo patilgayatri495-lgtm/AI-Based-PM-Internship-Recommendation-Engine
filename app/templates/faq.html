@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ - InternDisha{% endblock %}
+
+{% block content %}
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h1 class="section-title">Frequently Asked Questions</h1>
+        
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question">What is InternDisha?</div>
+                <div class="faq-answer">
+                    InternDisha is an independent academic project that helps students discover internship opportunities through personalized recommendations. It uses AI and machine learning to match student profiles with suitable internship opportunities inspired by the Prime Minister's Internship Scheme.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does recommendation scoring work?</div>
+                <div class="faq-answer">
+                    Our recommendation engine uses a hybrid approach with the following weighted components:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Skill Matching: 35%</li>
+                        <li>Education Compatibility: 20%</li>
+                        <li>Text Similarity: 20%</li>
+                        <li>Preference Match: 15%</li>
+                        <li>Location Preference: 10%</li>
+                    </ul>
+                    The scores are calculated based on your profile data and opportunity requirements. A higher score indicates a better match.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I upload my resume?</div>
+                <div class="faq-answer">
+                    After logging in, go to the Resume section in your profile. Click "Upload Resume" and select a PDF or DOCX file. Our system will automatically extract information from your resume, which you can review and correct before saving.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does a high match score guarantee selection?</div>
+                <div class="faq-answer">
+                    No, a high match score does not guarantee selection. The score indicates how well your profile aligns with the opportunity requirements. Final selection is determined by the official authorities and participating organizations through their own evaluation processes.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is InternDisha an official government website?</div>
+                <div class="faq-answer">
+                    No, InternDisha is an independent academic project inspired by the PM Internship Scheme. It is not affiliated with or endorsed by the Government of India. Please verify all information on the <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer">official PM Internship Scheme portal</a>.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I apply for an opportunity?</div>
+                <div class="faq-answer">
+                    InternDisha helps you discover and track opportunities. To apply, visit the <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer">official PM Internship Scheme portal</a>. We provide the link and help you track your application status.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I correct extracted resume information?</div>
+                <div class="faq-answer">
+                    After your resume is processed, you can review the extracted information in the Resume section. You can edit skills, education, projects, and other details before saving them to your profile. You can also manually enter information if resume extraction fails.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What file formats are supported for resume upload?</div>
+                <div class="faq-answer">
+                    We currently support PDF and DOCX formats. The maximum file size is 16MB. Ensure your resume is in a readable format for best extraction results.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is my data secure on InternDisha?</div>
+                <div class="faq-answer">
+                    Yes, we take data security seriously. Your password is hashed using industry-standard algorithms. Resumes are stored securely and are only accessible to you. We implement CSRF protection, input validation, and other security measures to protect your data.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I delete my account and data?</div>
+                <div class="faq-answer">
+                    Yes, you can request account deletion through your account settings. This will permanently delete your profile, resume, and all associated data. Please note that this action cannot be undone.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How often are opportunities updated?</div>
+                <div class="faq-answer">
+                    Opportunities are managed by administrators and can be updated regularly. Sample opportunities are provided for demonstration purposes. In production, opportunities would be imported from official sources and updated as new positions become available.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if I don't find any suitable opportunities?</div>
+                <div class="faq-answer">
+                    If no suitable opportunities are found, the system will explain why and suggest profile improvements. You can use the skill-gap analysis to identify missing skills and access learning resources to improve your profile. Updating your skills and preferences may help discover new matches.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I compare multiple opportunities?</div>
+                <div class="faq-answer">
+                    Yes, you can save opportunities and compare them side by side. The comparison feature shows organization, title, location, requirements, matching skills, stipend, and other relevant information to help you make informed decisions.
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 40px;">
+                <div class="card-body">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 15px;">Still Have Questions?</h3>
+                    <p style="line-height: 1.8; margin-bottom: 20px;">
+                        If you have questions not covered here, please contact us through the support section or refer to the <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer">official PM Internship Scheme portal</a> for scheme-specific queries.
+                    </p>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline">Learn More About the Scheme</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

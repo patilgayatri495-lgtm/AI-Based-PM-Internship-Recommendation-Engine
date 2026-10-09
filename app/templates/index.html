@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Home - InternDisha{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Internship Opportunities That Match Your Profile</h1>
+            <p class="hero-description">
+                InternDisha helps students explore suitable opportunities under the Prime Minister's Internship Scheme by analyzing skills, education, interests, and available eligibility information.
+            </p>
+            <div class="hero-buttons">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                {% else %}
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started</a>
+                {% endif %}
+                <a href="{{ url_for('opportunities.explore') }}" class="btn btn-outline">Find Recommended Internships</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Create Your Profile</h3>
+                <p class="step-description">Register and complete your student profile with education, skills, and preferences.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Upload Resume</h3>
+                <p class="step-description">Upload your resume or manually enter your skills and experience.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Get Recommendations</h3>
+                <p class="step-description">Receive personalized internship recommendations based on your profile.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Track Progress</h3>
+                <p class="step-description">Explore opportunities, apply, and track your application progress.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Services -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Core Services</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">📄</div>
+                <h3 class="service-title">Resume Analysis</h3>
+                <p class="service-description">Automatic extraction of skills, education, and experience from your resume.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-title">Personalized Recommendations</h3>
+                <p class="service-description">AI-powered matching to find opportunities that align with your profile.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">✓</div>
+                <h3 class="service-title">Eligibility Information</h3>
+                <p class="service-description">Clear information about scheme eligibility requirements.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Skill-Gap Analysis</h3>
+                <p class="service-description">Identify missing skills and get learning recommendations.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">⚖️</div>
+                <h3 class="service-title">Opportunity Comparison</h3>
+                <p class="service-description">Compare multiple opportunities side by side.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">📋</div>
+                <h3 class="service-title">Application Tracking</h3>
+                <p class="service-description">Track your applications and their status in one place.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scheme Information -->
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h2 class="section-title">About the PM Internship Scheme</h2>
+        <div class="card">
+            <div class="card-body">
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    The Prime Minister's Internship Scheme (PMIS) is a government initiative aimed at providing internship opportunities to youth across India. The scheme seeks to bridge the gap between education and employment by offering practical work experience in various organizations.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    InternDisha is an independent academic project inspired by this scheme. We help students discover relevant opportunities by matching their profiles with available internship positions.
+                </p>
+                <div style="background-color: var(--light-gray); padding: 15px; border-left: 4px solid var(--saffron-accent); margin-top: 20px;">
+                    <strong style="color: var(--primary-navy);">Important Notice:</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>InternDisha is an independent academic project and is not affiliated with the Government of India.</li>
+                        <li>Final eligibility, application acceptance, and selection are determined by the official authorities.</li>
+                        <li>Please verify all information on the official PM Internship Scheme portal.</li>
+                        <li>Scheme conditions may change. Always refer to official sources for the latest information.</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 20px;">
+                    <strong>Official Resources:</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-blue);">Open Official PM Internship Scheme Portal</a></li>
+                    </ul>
+                </div>
+                <p style="margin-top: 20px; font-size: 12px; color: #666;">
+                    Last verification date: January 2024
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Preview -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question">What is InternDisha?</div>
+                <div class="faq-answer">
+                    InternDisha is an independent academic project that helps students discover internship opportunities through personalized recommendations based on their skills, education, and preferences.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does recommendation scoring work?</div>
+                <div class="faq-answer">
+                    Our recommendation engine uses a hybrid approach combining skill matching, education compatibility, text similarity, and preference matching to calculate a match score for each opportunity.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Is InternDisha an official government website?</div>
+                <div class="faq-answer">
+                    No, InternDisha is an independent academic project inspired by the PM Internship Scheme. It is not affiliated with or endorsed by the Government of India.
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{{ url_for('main.faq') }}" class="btn btn-outline">View All FAQs</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

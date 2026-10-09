@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works - InternDisha{% endblock %}
+
+{% block content %}
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h1 class="section-title">How InternDisha Works</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <p style="line-height: 1.8; margin-bottom: 30px;">
+                    InternDisha uses a systematic approach to help you find the right internship opportunities. Here's how our platform works:
+                </p>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 1: Create Your Account</h2>
+                    <p style="line-height: 1.8;">
+                        Register on InternDisha with your email and create a secure password. Your account will give you access to all features including profile management, resume upload, and personalized recommendations.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 2: Complete Your Profile</h2>
+                    <p style="line-height: 1.8; margin-bottom: 15px;">
+                        Fill in your profile information across multiple sections:
+                    </p>
+                    <ul style="line-height: 1.8; margin-left: 20px;">
+                        <li><strong>Personal Details:</strong> Contact information, location, language preference</li>
+                        <li><strong>Education:</strong> Qualification, institution, specialization, graduation year</li>
+                        <li><strong>Skills & Experience:</strong> Technical skills, soft skills, projects, certifications</li>
+                        <li><strong>Preferences:</strong> Preferred industries, domains, roles, and locations</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 3: Upload Your Resume</h2>
+                    <p style="line-height: 1.8;">
+                        Upload your resume in PDF or DOCX format. Our system will automatically extract information such as skills, education, projects, and certifications. You can review and correct the extracted information before saving it to your profile.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 4: Generate Recommendations</h2>
+                    <p style="line-height: 1.8; margin-bottom: 15px;">
+                        Our recommendation engine analyzes your profile and matches it with available opportunities using:
+                    </p>
+                    <ul style="line-height: 1.8; margin-left: 20px;">
+                        <li><strong>Skill Matching (35%):</strong> Compares your skills against opportunity requirements</li>
+                        <li><strong>Education Compatibility (20%):</strong> Evaluates qualification alignment</li>
+                        <li><strong>Text Similarity (20%):</strong> Analyzes resume/profile text with opportunity descriptions</li>
+                        <li><strong>Preference Match (15%):</strong> Matches your industry and role preferences</li>
+                        <li><strong>Location Preference (10%):</strong> Considers your preferred work location</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 5: Review Recommendations</h2>
+                    <p style="line-height: 1.8;">
+                        Browse your personalized recommendations with detailed match scores, matching skills, missing skills, and explanations for each recommendation. Understand why an opportunity matches your profile.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 6: Explore and Apply</h2>
+                    <p style="line-height: 1.8;">
+                        Explore opportunities in detail, save interesting ones for later, compare multiple opportunities, and track your applications. Apply through the <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer">official PM Internship Scheme portal</a>.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: var(--primary-navy); margin-bottom: 20px;">Step 7: Skill Gap Analysis</h2>
+                    <p style="line-height: 1.8;">
+                        Identify skills you're missing based on your desired opportunities. Get personalized learning recommendations with curated resources to improve your profile and increase your match scores.
+                    </p>
+                </div>
+                
+                <div style="background-color: var(--light-gray); padding: 20px; border-left: 4px solid var(--success); margin-top: 40px;">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 15px;">Ready to Get Started?</h3>
+                    <p style="line-height: 1.8; margin-bottom: 20px;">
+                        Create your account today and discover internship opportunities that match your profile.
+                    </p>
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Register Now</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

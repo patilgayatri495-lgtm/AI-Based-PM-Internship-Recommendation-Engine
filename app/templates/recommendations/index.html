@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations - InternDisha{% endblock %}
+
+{% block content %}
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h1 class="section-title">Your Recommendations</h1>
+        
+        {% if recommendation %}
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>Generated:</strong> {{ recommendation.generated_at.strftime('%Y-%m-%d %H:%M') }}
+                    </div>
+                    <div>
+                        <strong>Algorithm Version:</strong> {{ recommendation.algorithm_version }}
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <form action="{{ url_for('recommendations.generate') }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button type="submit" class="btn btn-primary">Generate New Recommendations</button>
+                    </form>
+                    <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Official PM Internship Scheme Portal</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-body" style="text-align: center;">
+                <h3>Get your personalized internship matches</h3>
+                <p>Recommendations combine your profile, analyzed resume, skills, education, preferences, and currently open opportunities.</p>
+                <form action="{{ url_for('recommendations.generate') }}" method="POST" style="margin-top: 15px;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn btn-primary">Analyze Profile & Find Matches</button>
+                    <a href="{{ url_for('resume.upload') }}" class="btn btn-outline">Analyze Resume</a>
+                    <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Official PM Internship Scheme Portal</a>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if recommendation and items %}
+            {% for item in items %}
+            <div class="opportunity-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 class="opportunity-title">{{ item.opportunity.title }}</h3>
+                            <span class="match-score">{{ (item.match_score * 100)|round(1) }}% Match</span>
+                        </div>
+                        <p class="opportunity-organization">{{ item.opportunity.organization.name }}</p>
+                        <p><strong>Application deadline:</strong>
+                            {% if item.opportunity.application_deadline %}
+                                {{ item.opportunity.application_deadline.strftime('%b %d, %Y') }}
+                                ({{ (item.opportunity.application_deadline - today).days }} days remaining)
+                            {% else %}
+                                Not specified
+                            {% endif %}
+                        </p>
+                        
+                        <div style="margin: 15px 0; padding: 15px; background-color: var(--light-gray);">
+                            <strong>Why this matches:</strong>
+                            <p style="margin-top: 10px; line-height: 1.6;">{{ item.explanation }}</p>
+                        </div>
+                        
+                        <div class="opportunity-details">
+                            <div class="opportunity-detail"><strong>Skills Score:</strong> {{ (item.skills_score * 100)|round(1) }}%</div>
+                            <div class="opportunity-detail"><strong>Education Score:</strong> {{ (item.education_score * 100)|round(1) }}%</div>
+                            <div class="opportunity-detail"><strong>Text Similarity:</strong> {{ (item.text_similarity_score * 100)|round(1) }}%</div>
+                            <div class="opportunity-detail"><strong>Preference Match:</strong> {{ (item.preference_score * 100)|round(1) }}%</div>
+                            <div class="opportunity-detail"><strong>Location Match:</strong> {{ (item.location_score * 100)|round(1) }}%</div>
+                            <div class="opportunity-detail"><strong>Eligibility:</strong> 
+                                <span class="badge badge-{{ 'success' if item.eligibility_status == 'eligible' else 'warning' }}">
+                                    {{ item.eligibility_status|replace('_', ' ')|title }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="opportunity-skills">
+                            <strong>Matching Skills:</strong>
+                            <div style="margin-top: 5px;">
+                                {% set matching = json.loads(item.matching_skills) if item.matching_skills else [] %}
+                                {% for skill in matching %}
+                                <span class="skill-tag" style="background-color: #e8f5e9; color: var(--success);">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="opportunity-skills">
+                            <strong>Missing Skills:</strong>
+                            <div style="margin-top: 5px;">
+                                {% set missing = json.loads(item.missing_skills) if item.missing_skills else [] %}
+                                {% for skill in missing %}
+                                <span class="skill-tag" style="background-color: #ffebee; color: var(--danger);">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-gray);">
+                    <a href="{{ url_for('opportunities.detail', opportunity_id=item.opportunity.id) }}" class="btn btn-primary">View Details</a>
+                    <a href="{{ url_for('applications.add', opportunity_id=item.opportunity.id) }}" class="btn btn-outline">Track Application</a>
+                    <a href="{{ item.opportunity.source_url or 'https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&key=627157394627' }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Official PM Internship Scheme Portal</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% elif recommendation %}
+        <div class="card">
+            <div class="card-body" style="text-align: center; padding: 40px;">
+                <p style="font-size: 18px; color: var(--body-text);">No recommendations available.</p>
+                <p style="margin-top: 10px; color: #666;">Complete your profile and generate recommendations to see matching opportunities.</p>
+                <div style="margin-top: 20px;">
+                    <a href="{{ url_for('profile.edit') }}" class="btn btn-primary">Complete Profile</a>
+                    <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open Official PM Internship Scheme Portal</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Recommended Internships - InternDisha{% endblock %}
+
+{% block content %}
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h1 class="section-title">Find Your Internship Matches</h1>
+        <div class="card">
+            <div class="card-body" style="text-align: center; padding: 40px;">
+                <h2>Let your resume guide your search</h2>
+                <p style="margin: 15px 0;">
+                    Analyze your resume to match your skills, education, and interests with open internships.
+                    We’ll show match scores and explain which skills fit or are still needed.
+                </p>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('resume.upload') }}" class="btn btn-secondary">Analyze or Update Resume</a>
+                <a href="{{ url_for('recommendations.index') }}" class="btn btn-primary">View My Recommendations</a>
+                {% else %}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Log In to Get Matches</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-outline">Create Student Profile</a>
+                {% endif %}
+                <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Visit Official PM Internship Scheme Portal</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Track Application - InternDisha{% endblock %}
+
+{% block content %}
+<section class="section" style="background-color: var(--white);">
+    <div class="container">
+        <h1 class="section-title">Track Application</h1>
+        
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-body">
+                <h3 style="color: var(--primary-navy); margin-bottom: 10px;">{{ opportunity.title }}</h3>
+                <p style="color: var(--secondary-blue);">{{ opportunity.organization.name }}</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('applications.add', opportunity_id=opportunity.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="interested">Interested</option>
+                            <option value="preparing">Preparing</option>
+                            <option value="applied">Applied</option>
+                            <option value="assessment">Assessment/Interview</option>
+                            <option value="selected">Selected</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="withdrawn">Withdrawn</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label">
+                            <input type="checkbox" name="applied" id="applied"> I have already applied
+                        </label>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label" for="notes">Notes</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Add any notes about this application..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Track Application</button>
+                        <a href="{{ url_for('opportunities.detail', opportunity_id=opportunity.id) }}" class="btn btn-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #e3f2fd; border-left: 4px solid var(--info);">
+            <strong>Important:</strong>
+            <p style="margin-top: 10px; margin-bottom: 0;">
+                InternDisha helps you track your applications. To apply, visit the <a href="https://mybharat.gov.in/vo/pages/event_detail?event_name=Prime-Minister-Internship-Scheme&amp;key=627157394627" target="_blank" rel="noopener noreferrer">official PM Internship Scheme portal</a>.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
